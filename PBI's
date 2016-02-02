@@ -1,0 +1,12 @@
+Here are our PBIs:
+
+As a user I see the character displayed in a large font so that I can see it clearly. 
+
+As a user I can paste a character into the app so that I can find out the unicode.
+
+As a user, I can be shown how my character is code in java so I can use it in my own code. 
+
+As a user, I can learn what the character means so I know how to use it properly.
+
+As a user I can see the (alpha, hex, .. ) so that I can generate the character.
+
