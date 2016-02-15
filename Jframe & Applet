@@ -1,0 +1,190 @@
+import java.applet.Applet;
+import java.awt.*; 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.border.Border;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+
+
+
+public class CharacterIdentifier extends Applet implements ActionListener {
+
+
+	
+	JFrame frame = new JFrame("Character Identifier"); //Create a frame to the Applet
+	JTextArea textArea1 = new JTextArea("Unicode: " , 10, 25); //Space where the Unicode is going to be print out
+	JTextArea textArea2 = new JTextArea("Hex Decimal: ", 10, 25); //Space where the hex code is going to be print
+	JTextArea textArea3 = new JTextArea("Large Font: ", 10, 25);
+	JTextArea textArea4 = new JTextArea("Description: ", 10, 25);
+	JButton search = new JButton("Search");
+	JTextField textfield = new JTextField(43); //Space where the user can type in a character to find the unicode and hex code  
+    FlowLayout flow = new FlowLayout(); // make the panels and text go one after another horizontally
+	//(not important)BoxLayout vertical = new BoxLayout(frame, 10);
+    
+	
+	public CharacterIdentifier() { 
+		  
+		  frame.setSize(800,800);
+		  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+		  Border border = BorderFactory.createLineBorder(Color.BLACK); // set a border to see the size of objects in the Applet. Help me see what I am doing
+
+		
+		  //Set the size and font and location of text area and text field
+		  textArea1.setSize(25, 25); 
+		  textArea1.setBorder(border);
+		  textArea1.setEditable(false);
+		  textArea1.setFont(new Font("Verdana", Font.BOLD, 12));
+		  textArea1.setLocation(200,25); 
+		 
+		  textArea2.setSize(25, 25);
+		  textArea2.setBorder(border);
+		  textArea2.setEditable(false);
+		  textArea2.setFont(new Font("Verdana", Font.BOLD, 12));
+		  textArea2.setLocation(200,25); 
+		  
+		  textfield.setBorder(border);
+		  textfield.setFont(new Font("Verdana", Font.BOLD, 12));
+		  textfield.setLocation(200,25); 
+		  //set the layout to the frame 
+		  frame.setLayout(new FlowLayout());
+		  
+		  textArea3.setSize(25, 25);
+		  textArea3.setBorder(border);
+		  textArea3.setEditable(false);
+		  textArea3.setFont(new Font("Verdana", Font.BOLD, 12));
+		  textArea3.setLocation(200,25); 
+		  
+		  textArea4.setSize(25, 25);
+		  textArea4.setBorder(border);
+		  textArea4.setEditable(false);
+		  textArea4.setFont(new Font("Verdana", Font.BOLD, 12));
+		  textArea4.setLocation(200,25); 
+		  
+		 
+		  
+		  //create to Jpanel to inset the text area and textfield inside.
+		  JPanel a = new JPanel();
+		  JPanel b = new JPanel();
+		  JPanel c = new JPanel();
+		  
+		 // set size and location of the panels
+		 
+		  a.setBorder(border);
+		  a.setLayout(new FlowLayout());
+		  
+		  
+		  b.setBorder(border);
+		  b.setLocation(400,600);
+		  	
+		  c.setBorder(border); 
+		  c.setLayout(new FlowLayout());
+		  
+		  // add textarea to panel
+		  a.add(textArea1);
+		  a.add(textArea2);
+		
+		  b.add(textfield);
+		  b.add(search);
+		  
+		  c.add(textArea3);
+		  c.add(textArea4);
+		  
+		  
+		  search.addActionListener();
+		  
+		  
+		  
+		  //add panels to the frame
+		  frame.add(a);
+		  frame.add(b);
+		  frame.add(c);
+		  frame.setVisible(true);
+		  
+		  
+		  
+		  
+		  
+	}
+
+	public static void main(String[] args) { 
+		
+		Unicode userinput = new Unicode();
+		
+		Scanner scan = new Scanner(System.in);
+		
+		userinput.setLargeFont(scan.next()); 
+		
+		
+		}
+	
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	// This is the hex and unidoce with the csv file.
+	// me and my partners work on it.
+	
+	//public static void main(String[] args) {
+
+		//Scanner scan = new Scanner(System.in);
+
+		  // String fileName = "/Users/Documents/Character_Identifier/entityfacts.csv";
+
+		  // File file = new File(fileName); // TODO: read about File Names
+		   
+		   //e
+
+		   //int char_find = character_find.charAt(0);
+		   //JOptionPane.showMessageDialog(null, char_find);
+		   //JOptionPane.showMessageDialog(null, Integer.toHexString(char_find));
+		   
+		   //try {
+		     //  Scanner inputStream = new Scanner(file);
+		       //while (inputStream.hasNext()){
+		         //  String data = inputStream.nextLine();
+		           //System.out.println(data);
+		      // }
+
+		      // inputStream.close();
+
+
+		 //  } catch (FileNotFoundException e) {
+
+		       // TODO Auto-generated catch block
+
+		   //    e.printStackTrace();
+
+		   //}
+
+	
+
+	}
+	//}
+
+
