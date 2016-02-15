@@ -1,0 +1,25 @@
+public class scanInput{
+int index;
+String[] hex = ScannerExample.getHex();
+String[] categories = ScannerExample.getCategories();
+String[] description = ScannerExample.getDescription();
+
+	public scanInput(String input){
+		for (int s = 0; s < hex.length; s++){
+			if (input == hex[s]){
+				index = s;
+			}
+		}
+	}
+	
+	public String[] matchInput(int i) {
+		String[] allInfo = new String[2];
+		allInfo[0] = categories[i];
+		allInfo[1] = hex[i];
+		allInfo[2] = description[i];
+		
+		
+		return hex;
+		
+	}
+}
