@@ -1,0 +1,116 @@
+import java.awt.Font;
+import java.awt.List;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+import javax.swing.plaf.FontUIResource;
+
+
+public class ScannerExample {
+	public static String[] hexS;
+	public static String[] categoriesS;
+	public static String[] descriptionS;
+	public static ArrayList<String> categories = new ArrayList<String>();
+	public static ArrayList<String> hex = new ArrayList<String>();
+	public static ArrayList<String> overstrike = new ArrayList<String>();
+	public static ArrayList<String> alphaEntity = new ArrayList<String>();
+	public static ArrayList<String> description = new ArrayList<String>();
+
+public static void main(String[] args) {
+	
+	String fileName = "res/entityfacts.csv";//create a string out of the file
+	File file = new File(fileName); // make into a file for Java
+	
+  
+   
+   try {
+	   int i = 0;
+       Scanner inputStream = new Scanner(file);//create scanner
+       while (inputStream.hasNext()){//read lines
+           //String data = inputStream.nextLine();//scan the data
+           //System.out.println(data);
+           String data = inputStream.next();
+           if (i <= 10) System.out.println("Category: " + data);
+           data = removeComma(data);
+           categories.add(data);
+           data = inputStream.next();
+           if (i <= 10) System.out.println("Hex: " + data);
+           data = removeComma(data);
+           hex.add(data);
+           data = inputStream.next();
+           if (i <= 10) System.out.println("Overstrike: " + data);
+           data = removeComma(data);
+           overstrike.add(data);
+           data = inputStream.next();
+           if (i <= 10) System.out.println("AlphaEntity: " + data);
+           data = removeComma(data);
+           alphaEntity.add(data);
+           data = inputStream.nextLine();
+           if (i <= 10) System.out.println("Description: " + data);
+           data = removeComma(data);
+           description.add(data);
+          
+          
+          
+           
+       }
+       inputStream.close();//close scan
+
+   } catch (FileNotFoundException e) {
+       // TODO Auto-generated catch block
+       e.printStackTrace();
+   }
+   hexS = hex.toArray(new String[hex.size()]);
+   //System.out.println(Arrays.deepToString(hexS));
+
+   
+   descriptionS = description.toArray(new String[description.size()]);
+   //System.out.println(Arrays.deepToString(descriptionS));
+   String character_find = JOptionPane.showInputDialog(null, "Input character:");//input a char
+	
+	javax.swing.UIManager.put("OptionPane.messageFont" , new FontUIResource(new Font("Verdana", Font.PLAIN, 25))); 
+	JOptionPane.showMessageDialog(null, character_find.charAt(0));
+	int char_find = character_find.charAt(0);//turn char into an int
+ 
+  //scanInput scan = new scanInput((String)Integer.toHexString(char_find));
+  
+
+	javax.swing.UIManager.put("OptionPane.messageFont" , new FontUIResource(new Font("Verdana", Font.PLAIN, 15))); 
+  JOptionPane.showMessageDialog(null, "Decimal: " + char_find);//print decimal version of char
+  JOptionPane.showMessageDialog(null, "Decimal Entity: &#" + char_find);//print decimal version of char
+  JOptionPane.showMessageDialog(null, "Java: \\u00" + Integer.toHexString(char_find));//print hexadecmal version of char
+  JOptionPane.showMessageDialog(null, "Hex: 0x00" + Integer.toHexString(char_find));//print hexadecmal version of char
+  JOptionPane.showMessageDialog(null, "Hex Entity: &#0x00" + Integer.toHexString(char_find));//print hexadecmal version of char
+  JOptionPane.showMessageDialog(null, "UTF-8: " + Integer.toHexString(char_find));//print hexadecmal version of char
+
+  int a = 0;
+   for(int i1 = 0; "0x" + Integer.toHexString(char_find).equals("0x" + hex.get(i1)/*i1 < hex.size()*/; i1++) {   
+	   /*if((boolean)Integer.toHexString(char_find).equals(hex.get(i1)) ){
+		   
+		   a ++;
+		   System.out.println(hex.get(i1).toString());
+		   System.out.println(a);*/
+	   
+  	    System.out.println((hex.get(i1)).toString() + description.get(i1).toString());
+  	} 
+   
+	   
+   }
+
+private static String removeComma(String input) {
+	//Remove comma here
+	String replace = "";
+	String result = input.replaceAll("," ,replace);
+	return result;
+	
+}
+
+
+
+   
+}
+
