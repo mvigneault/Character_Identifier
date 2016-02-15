@@ -1,40 +1,98 @@
+import java.awt.List;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import javax.swing.JOptionPane;
 
 
 public class ScannerExample {
+	public static String[] hexS; //create string array
+	public static String[] categoriesS;
+	public static String[] descriptionS;
+	public static ArrayList<String> categories = new ArrayList<String>(); //create arrays for each section of the file
+	public static ArrayList<String> hex = new ArrayList<String>();
+	public static ArrayList<String> overstrike = new ArrayList<String>();
+	public static ArrayList<String> alphaEntity = new ArrayList<String>();
+	public static ArrayList<String> description = new ArrayList<String>();
 
 public static void main(String[] args) {
-	
-	 String character;
-	 Scanner scan = new Scanner(System.in);
-	 
-	
-   //.csv comma separated values
-   String fileName = "/Users/smcavoy19/Documents/Character_Identifier/entityfacts.csv";
 
-   File file = new File(fileName); // TODO: read about File Names
+	  
+	String fileName = "res/entityfacts.csv";//create a string out of the file
+
+   File file = new File(fileName); // make into a file for Java
+   
+   String character_find = JOptionPane.showInputDialog(null, "Input character:");//input a char
+   
+   scan.scanInput(character_find);
+   
+   int char_find = character_find.charAt(0);	//turn char into an int
+   JOptionPane.showMessageDialog(null, char_find);	//print decimal version of char
+   JOptionPane.showMessageDialog(null, "0x" + Integer.toHexString(char_find));	//print hexadecmal version of char
+   
+  
    try {
-       Scanner inputStream = new Scanner(file);
-       while (inputStream.hasNext()){
-           String data = inputStream.next();
-           System.out.println(data);
+	   int i = 0;
+       Scanner inputStream = new Scanner(file);//create scanner
+       while (inputStream.hasNext()){//read lines
+           String data = inputStream.next();      //take data read line
+           data = removeComma(data);			//remove extra comma in the data
+           categories.add(data);		//add date to the array
+           data = inputStream.next();		//repeat
+           data = removeComma(data);
+           hex.add(data);
+           data = inputStream.next();
+           data = removeComma(data);
+           overstrike.add(data);
+           data = inputStream.next();
+           data = removeComma(data);
+           alphaEntity.add(data);
+           data = inputStream.nextLine();
+           data = removeComma(data);
+           description.add(data);
+           
        }
-       inputStream.close();
+       inputStream.close();//close scan
 
    } catch (FileNotFoundException e) {
        // TODO Auto-generated catch block
        e.printStackTrace();
    }
-  
+   
+   
+   hexS = hex.toArray(new String[hex.size()]);     //make hexS into the size of array hex and make it an array
+   descriptionS = description.toArray(new String[description.size()]);
 
-   		character = scan.nextLine();
-	   System.out.print(character);
+
+   
+   
 	   
    }
 
+private static String removeComma(String input) {
+	//Remove comma here
+	String replace = "";    //creat blank space
+	String result = input.replaceAll("," ,replace);    //replace any comma with blank space
+	return result;      //return result
+	
+}
+
+public static String[] getHex() {
+	return hexS;   //return te hexS so my other class can see it
+}
+
+public static String[] getCategories() {
+	return categoriesS;
+}
+
+public static String[] getDescription() {
+	return categoriesS;
+}
+
    
 }
+
+
