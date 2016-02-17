@@ -1,0 +1,117 @@
+import java.awt.Font;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+import javax.swing.JOptionPane;
+import javax.swing.plaf.FontUIResource;
+
+public class ScannerExample {
+	public static String[] hexS;
+	public static String[] categoriesS;
+	public static String[] descriptionS;
+	public static String[] overstrikeS;
+	public static ArrayList<String> categories = new ArrayList<String>();
+	public static ArrayList<String> hex = new ArrayList<String>();
+	public static ArrayList<String> overstrike = new ArrayList<String>();
+	public static ArrayList<String> alphaEntity = new ArrayList<String>();
+	public static ArrayList<String> description = new ArrayList<String>();
+
+	public static void main(String[] args) {
+
+		String fileName = "res/entityfacts.csv";
+		File file = new File(fileName);
+
+		try {
+			Scanner inputStream = new Scanner(file);
+			while (inputStream.hasNext()) {
+
+				String data = inputStream.next();
+
+				data = removeComma(data);
+				categories.add(data);
+				data = inputStream.next();
+
+				data = removeComma(data);
+				hex.add(data);
+				data = inputStream.next();
+
+				data = removeComma(data);
+				overstrike.add(data);
+				data = inputStream.next();
+
+				data = removeComma(data);
+				alphaEntity.add(data);
+				data = inputStream.nextLine();
+
+				data = removeComma(data);
+				data = removeSpace(data);
+				data = removeQuote(data);
+				description.add(data);
+
+			}
+			inputStream.close();// close scan
+
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		hexS = hex.toArray(new String[hex.size()]);
+		descriptionS = description.toArray(new String[description.size()]);
+		overstrikeS = overstrike.toArray(new String[overstrike.size()]);
+
+		String character_find = JOptionPane.showInputDialog(null,
+				"Input character:");
+		javax.swing.UIManager.put("OptionPane.messageFont", new FontUIResource(
+				new Font("Verdana", Font.PLAIN, 25)));
+		JOptionPane.showMessageDialog(null, character_find.charAt(0));
+		int char_find = character_find.charAt(0);
+		javax.swing.UIManager.put("OptionPane.messageFont", new FontUIResource(
+				new Font("Verdana", Font.PLAIN, 15)));
+		JOptionPane.showMessageDialog(null, "Decimal: " + char_find);
+		JOptionPane.showMessageDialog(null, "Decimal Entity: &#" + char_find);
+		JOptionPane.showMessageDialog(null,
+				"Java: \\u00" + Integer.toHexString(char_find));
+		JOptionPane.showMessageDialog(null,
+				"Hex: 0x00" + Integer.toHexString(char_find));
+		JOptionPane.showMessageDialog(null,
+				"Hex Entity: &#0x00" + Integer.toHexString(char_find));
+		JOptionPane.showMessageDialog(null,
+				"UTF-8: " + Integer.toHexString(char_find));
+
+		String a = "0x" + Integer.toHexString(char_find);
+		int index = -1;
+		for (int i1 = 0; i1 < hex.size(); i1++) {
+
+			if (hexS[i1].equals(a)) {
+				index = i1;
+				JOptionPane.showMessageDialog(null, "Description: "
+						+ descriptionS[index]);
+				JOptionPane.showMessageDialog(null, "How to code in HTML: "
+						+ overstrikeS[index]);
+			}
+
+		}
+	}
+
+	private static String removeComma(String input) {
+		// Remove comma here
+		String replace = "";
+		String result = input.replaceAll(",", replace);
+		return result;
+	}
+
+	private static String removeSpace(String input) {
+		String replace2 = "";
+		String result2 = input.replaceAll("  ", replace2);
+		return result2;
+	}
+
+	private static String removeQuote(String input) {
+		String replace = "";
+		String result2 = input.replaceAll("\"", replace);
+		return result2;
+	}
+
+}
