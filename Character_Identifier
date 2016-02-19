@@ -8,11 +8,11 @@ import javax.swing.JOptionPane;
 import javax.swing.plaf.FontUIResource;
 
 public class ScannerExample {
-	public static String[] hexS;
+	public static String[] hexS;   //make a string array
 	public static String[] categoriesS;
 	public static String[] descriptionS;
 	public static String[] overstrikeS;
-	public static ArrayList<String> categories = new ArrayList<String>();
+	public static ArrayList<String> categories = new ArrayList<String>();     //make an array list
 	public static ArrayList<String> hex = new ArrayList<String>();
 	public static ArrayList<String> overstrike = new ArrayList<String>();
 	public static ArrayList<String> alphaEntity = new ArrayList<String>();
@@ -20,20 +20,20 @@ public class ScannerExample {
 
 	public static void main(String[] args) {
 
-		String fileName = "res/entityfacts.csv";
-		File file = new File(fileName);
+		String fileName = "res/entityfacts.csv";   // create file as string
+		File file = new File(fileName);      //make the file into official file
 
 		try {
-			Scanner inputStream = new Scanner(file);
-			while (inputStream.hasNext()) {
+			Scanner inputStream = new Scanner(file);   //create scanner
+			while (inputStream.hasNext()) {    //while the file reads each line
 
-				String data = inputStream.next();
+				String data = inputStream.next();   //data equals the next line
 
-				data = removeComma(data);
-				categories.add(data);
-				data = inputStream.next();
+				data = removeComma(data);    //remove extra comma
+				categories.add(data);    //add to array list
+				data = inputStream.next();   //go to next line
 
-				data = removeComma(data);
+				data = removeComma(data);   //repeat
 				hex.add(data);
 				data = inputStream.next();
 
@@ -46,8 +46,8 @@ public class ScannerExample {
 				data = inputStream.nextLine();
 
 				data = removeComma(data);
-				data = removeSpace(data);
-				data = removeQuote(data);
+				data = removeSpace(data);   //remove double spaces
+				data = removeQuote(data);   //remove quotes
 				description.add(data);
 
 			}
@@ -57,22 +57,22 @@ public class ScannerExample {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		hexS = hex.toArray(new String[hex.size()]);
+		hexS = hex.toArray(new String[hex.size()]);   //make hexS have values of hex
 		descriptionS = description.toArray(new String[description.size()]);
 		overstrikeS = overstrike.toArray(new String[overstrike.size()]);
 
 		String character_find = JOptionPane.showInputDialog(null,
-				"Input character:");
+				"Input character:");    							//create variable for input
 		javax.swing.UIManager.put("OptionPane.messageFont", new FontUIResource(
-				new Font("Verdana", Font.PLAIN, 25)));
-		JOptionPane.showMessageDialog(null, character_find.charAt(0));
-		int char_find = character_find.charAt(0);
+				new Font("Verdana", Font.PLAIN, 25))); 				//large font
+		JOptionPane.showMessageDialog(null, character_find.charAt(0));    //decimal value
+		int char_find = character_find.charAt(0);     //find the first character make an int
 		javax.swing.UIManager.put("OptionPane.messageFont", new FontUIResource(
-				new Font("Verdana", Font.PLAIN, 15)));
-		JOptionPane.showMessageDialog(null, "Decimal: " + char_find);
-		JOptionPane.showMessageDialog(null, "Decimal Entity: &#" + char_find);
+				new Font("Verdana", Font.PLAIN, 15)));   //normal font
+		JOptionPane.showMessageDialog(null, "Decimal: " + char_find);   //deciaml value
+		JOptionPane.showMessageDialog(null, "Decimal Entity: &#" + char_find);   //add string in front
 		JOptionPane.showMessageDialog(null,
-				"Java: \\u00" + Integer.toHexString(char_find));
+				"Java: \\u00" + Integer.toHexString(char_find));   //makes into a hex
 		JOptionPane.showMessageDialog(null,
 				"Hex: 0x00" + Integer.toHexString(char_find));
 		JOptionPane.showMessageDialog(null,
@@ -80,16 +80,16 @@ public class ScannerExample {
 		JOptionPane.showMessageDialog(null,
 				"UTF-8: " + Integer.toHexString(char_find));
 
-		String a = "0x" + Integer.toHexString(char_find);
-		int index = -1;
-		for (int i1 = 0; i1 < hex.size(); i1++) {
+		String a = "0x" + Integer.toHexString(char_find);    //create a hex for file
+		int index = -1;    //start index at -1
+		for (int i1 = 0; i1 < hex.size(); i1++) {       //for loop that runs until size of hex
 
-			if (hexS[i1].equals(a)) {
-				index = i1;
+			if (hexS[i1].equals(a)) {     //if the value i1 is at equals the hex input
+				index = i1;      //then index == i1
 				JOptionPane.showMessageDialog(null, "Description: "
-						+ descriptionS[index]);
+						+ descriptionS[index]);     //print the description version of that index
 				JOptionPane.showMessageDialog(null, "How to code in HTML: "
-						+ overstrikeS[index]);
+						+ overstrikeS[index]);      //and print the overstrike version of that index
 			}
 
 		}
@@ -97,9 +97,9 @@ public class ScannerExample {
 
 	private static String removeComma(String input) {
 		// Remove comma here
-		String replace = "";
-		String result = input.replaceAll(",", replace);
-		return result;
+		String replace = "";     //make empty string
+		String result = input.replaceAll(",", replace);  //for commas replace with blank string
+		return result;  //return result
 	}
 
 	private static String removeSpace(String input) {
